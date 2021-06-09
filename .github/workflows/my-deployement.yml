@@ -1,0 +1,26 @@
+name: bootcamp training 2020
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    #runs a single command using the runner shell
+    - name: installing Node
+      uses: actions/setup-node@v2-beta
+      with:
+        Node-version: 14
+        
+     #runs a single command using the runner shell
+    - name: installing surge
+      run: npm install --global surge
+    - name: deploying using surge
+      run: surge ./ BootcampTraining2020.surge.sh --token $ {{ secrets.SURGE_SECRET_TOKEN }}
+ 
+
